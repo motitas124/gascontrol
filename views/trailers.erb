@@ -1,0 +1,75 @@
+<%= erb :_pasos, layout: false, locals: { actual: 3 } %>
+<section class="panel">
+  <h1 class="panel__titulo">Trailers</h1>
+  <p class="panel__subtitulo">Registra cada trailer y el valor de su flete. Si no usaste trailers, deja el valor en 0 y presiona Siguiente.</p>
+
+  <form action="/gasolineras/<%= @gasolinera.id %>/trailers" method="post">
+    <div id="trailers">
+      <% filas = @filas.empty? ? [{ descripcion: '', valor: '' }] : @filas %>
+      <% filas.each do |f| %>
+        <div class="trailer" data-trailer>
+          <input class="entrada" type="text" name="descripcion[]" placeholder="Trailer o placa (opcional)" value="<%= h(f[:descripcion]) %>" aria-label="Trailer o placa">
+          <input class="entrada" type="number" step="any" min="0" inputmode="decimal" name="valor[]" placeholder="Valor del flete" value="<%= h(f[:valor]) %>" aria-label="Valor del flete" data-valor>
+          <button type="button" class="boton boton--chico trailer__quitar">Quitar</button>
+        </div>
+      <% end %>
+    </div>
+
+    <button type="button" class="boton" id="agregar-trailer">+ Agregar otro trailer</button>
+
+    <div class="cifras">
+      <div class="cifra">
+        <small class="cifra__titulo">Total de fletes</small>
+        <div class="visor" id="total-fletes" aria-live="polite">$0.00</div>
+      </div>
+    </div>
+
+    <% (@errores || []).each do |msg| %>
+      <p class="alerta alerta--error"><%= h(msg) %></p>
+    <% end %>
+
+    <div class="acciones">
+      <button type="submit" class="boton boton--primario">Siguiente</button>
+    </div>
+  </form>
+</section>
+
+<template id="plantilla-trailer">
+  <div class="trailer" data-trailer>
+    <input class="entrada" type="text" name="descripcion[]" placeholder="Trailer o placa (opcional)" aria-label="Trailer o placa">
+    <input class="entrada" type="number" step="any" min="0" inputmode="decimal" name="valor[]" placeholder="Valor del flete" aria-label="Valor del flete" data-valor>
+    <button type="button" class="boton boton--chico trailer__quitar">Quitar</button>
+  </div>
+</template>
+
+<script>
+(function () {
+  var cont = document.getElementById('trailers');
+  var total = document.getElementById('total-fletes');
+  function fmt(n) {
+    return '$' + n.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+  }
+  function calcular() {
+    var s = 0;
+    cont.querySelectorAll('[data-valor]').forEach(function (i) { s += parseFloat(i.value) || 0; });
+    total.textContent = fmt(s);
+  }
+  document.getElementById('agregar-trailer').addEventListener('click', function () {
+    var t = document.getElementById('plantilla-trailer');
+    cont.appendChild(t.content.cloneNode(true));
+    cont.lastElementChild.querySelector('input').focus();
+  });
+  cont.addEventListener('click', function (e) {
+    if (!e.target.classList.contains('trailer__quitar')) return;
+    var fila = e.target.closest('[data-trailer]');
+    if (cont.querySelectorAll('[data-trailer]').length > 1) {
+      fila.remove();
+    } else {
+      fila.querySelectorAll('input').forEach(function (i) { i.value = ''; });
+    }
+    calcular();
+  });
+  cont.addEventListener('input', calcular);
+  calcular();
+})();
+</script>

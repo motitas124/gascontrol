@@ -1,0 +1,21 @@
+<div class="acceso">
+  <section class="panel panel--suelto">
+    <h1 class="panel__titulo">Iniciar sesión</h1>
+    <p class="panel__subtitulo">Entra para registrar y evaluar tus gasolineras.</p>
+
+    <form action="/login" method="post">
+      <label class="campo">
+        <span class="campo__etiqueta">Correo</span>
+        <input class="entrada" type="email" name="email" placeholder="tucorreo@ejemplo.com" value="<%= h(params[:email]) %>">
+      </label>
+      <label class="campo">
+        <span class="campo__etiqueta">Contraseña</span>
+        <input class="entrada" type="password" name="password" placeholder="Tu contraseña">
+      </label>
+      <% if @error %><p class="alerta alerta--error"><%= h(@error) %></p><% end %>
+      <button type="submit" class="boton boton--primario">Entrar</button>
+    </form>
+  </section>
+
+  <p class="acceso__pie">¿No tienes cuenta? <a href="/register">Regístrate</a></p>
+</div>

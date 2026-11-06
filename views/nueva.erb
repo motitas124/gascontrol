@@ -1,0 +1,24 @@
+<%= erb :_pasos, layout: false, locals: { actual: 1 } %>
+<section class="panel">
+  <h1 class="panel__titulo">Registrar gasolinera</h1>
+  <p class="panel__subtitulo">Escribe el nombre y la ubicación de la gasolinera que vas a evaluar.</p>
+
+  <% destino = @gasolinera.persisted? ? "/gasolineras/#{@gasolinera.id}" : '/gasolineras' %>
+  <form action="<%= destino %>" method="post">
+    <% if @gasolinera.persisted? %><input type="hidden" name="_method" value="put"><% end %>
+    <label class="campo">
+      <span class="campo__etiqueta">Nombre de la gasolinera</span>
+      <input class="entrada" type="text" name="nombre" placeholder="Ej: Gasolinera El Sol" value="<%= h(@gasolinera.nombre) %>">
+    </label>
+    <label class="campo">
+      <span class="campo__etiqueta">Ubicación de la gasolinera</span>
+      <input class="entrada" type="text" name="ubicacion" placeholder="Ej: Av. Amazonas y Naciones Unidas, Quito" value="<%= h(@gasolinera.ubicacion) %>">
+    </label>
+    <% @gasolinera.errors.map(&:message).each do |msg| %>
+      <p class="alerta alerta--error"><%= h(msg) %></p>
+    <% end %>
+    <div class="acciones">
+      <button type="submit" class="boton boton--primario">Siguiente</button>
+    </div>
+  </form>
+</section>

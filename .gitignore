@@ -1,0 +1,16 @@
+# Base de datos local (se crea con: bundle exec rake db:migrate)
+db/*.sqlite3
+db/*.sqlite3-*
+
+# Bundler
+.bundle/
+vendor/bundle/
+Gemfile.lock
+
+# Variables de entorno y registros
+.env
+*.log
+
+# Sistema y editor
+.DS_Store
+Thumbs.db

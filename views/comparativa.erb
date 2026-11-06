@@ -1,0 +1,58 @@
+<section class="panel panel--suelto comparativa">
+  <h1 class="panel__titulo">Comparativa de gasolineras</h1>
+  <p class="panel__subtitulo">Se comparan por margen neto: cuánto queda de ganancia por cada dólar vendido.</p>
+
+  <% if @ganadora %>
+    <p class="alerta alerta--info">
+      La gasolinera más rentable es <strong><%= h(@ganadora.gasolinera.nombre) %></strong>,
+      con un margen neto de <%= pct(@ganadora.margen) %> y una utilidad de <%= money(@ganadora.utilidad) %>.
+    </p>
+  <% else %>
+    <p class="alerta alerta--info">Ninguna de las gasolineras es rentable con los datos registrados.</p>
+  <% end %>
+
+  <div class="comparativa__tarjetas">
+    <% @evs.each do |ev| %>
+      <article class="tarjeta">
+        <% if @ganadora && ev.gasolinera.id == @ganadora.gasolinera.id %>
+          <span class="tarjeta__insignia">Más rentable</span>
+        <% end %>
+        <h2 class="tarjeta__titulo"><%= h(ev.gasolinera.nombre) %></h2>
+        <p class="ubicacion"><%= h(ev.gasolinera.ubicacion) %></p>
+
+        <div class="semaforo semaforo--compacto semaforo--<%= ev.nivel %>" role="status">
+          <span class="semaforo__luz" aria-hidden="true"></span>
+          <span><%= ev.etiqueta %></span>
+        </div>
+
+        <dl class="metricas">
+          <dt class="metricas__termino">Ingresos por ventas</dt><dd class="metricas__valor"><%= money(ev.ingresos) %></dd>
+          <dt class="metricas__termino">Costo del combustible vendido</dt><dd class="metricas__valor"><%= money(ev.costo_vendido) %></dd>
+          <dt class="metricas__termino">Fletes</dt><dd class="metricas__valor"><%= money(ev.fletes) %></dd>
+          <dt class="metricas__termino">Utilidad neta</dt><dd class="metricas__valor"><%= money(ev.utilidad) %></dd>
+          <dt class="metricas__termino">Margen neto</dt><dd class="metricas__valor"><%= pct(ev.margen) %></dd>
+          <dt class="metricas__termino">Galones que quedan</dt><dd class="metricas__valor"><%= gal(ev.galones_restantes) %></dd>
+        </dl>
+
+        <% if ev.accion %>
+          <div class="accion accion--<%= ev.nivel == :rojo ? 'vender' : 'conservar' %>"><%= ev.accion %></div>
+        <% end %>
+
+        <details class="desplegable" open>
+          <summary class="desplegable__titulo"><%= ev.titulo_detalle %></summary>
+          <ul class="lista-detalle">
+            <% ev.detalle.each do |texto| %>
+              <li class="lista-detalle__item"><%= h(texto) %></li>
+            <% end %>
+          </ul>
+        </details>
+      </article>
+    <% end %>
+  </div>
+
+  <div class="acciones">
+    <form class="acciones__formulario" action="/nueva-evaluacion" method="post">
+      <button type="submit" class="boton boton--primario">Nueva evaluación</button>
+    </form>
+  </div>
+</section>

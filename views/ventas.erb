@@ -1,0 +1,52 @@
+<%= erb :_pasos, layout: false, locals: { actual: 4 } %>
+<section class="panel">
+  <h1 class="panel__titulo">Galones vendidos</h1>
+  <p class="panel__subtitulo">Para <strong><%= h(@gasolinera.nombre) %></strong>: escribe los galones que vendiste de cada combustible y el precio al que vendiste cada galón. Al presionar Listo verás cuánto te queda y cuánto has vendido.</p>
+
+  <form action="/gasolineras/<%= @gasolinera.id %>/ventas" method="post">
+    <%= erb :_tabla_combustibles, layout: false, locals: { filas: @filas, etiqueta_g: 'Galones vendidos', etiqueta_p: 'Precio de venta por galón', etiqueta_t: 'Total vendido' } %>
+
+    <% (@errores || []).each do |msg| %>
+      <p class="alerta alerta--error"><%= h(msg) %></p>
+    <% end %>
+
+    <div class="acciones">
+      <button type="submit" class="boton boton--primario">Listo</button>
+      <a class="boton" href="/gasolineras/<%= @gasolinera.id %>/riesgos">Siguiente</a>
+    </div>
+  </form>
+
+  <% if @listo && @ev %>
+    <div class="resumen">
+      <h2 class="resumen__titulo">Resumen de ventas</h2>
+      <div class="cifras">
+        <div class="cifra">
+          <small class="cifra__titulo">Total vendido en dinero</small>
+          <div class="visor"><%= money(@ev.ingresos) %></div>
+        </div>
+        <div class="cifra">
+          <small class="cifra__titulo">Total de galones que te quedan</small>
+          <div class="visor"><%= gal(@ev.galones_restantes) %></div>
+        </div>
+      </div>
+
+      <div class="tabla-datos__contenedor">
+        <table class="tabla-datos">
+          <thead>
+            <tr><th>Combustible</th><th>Comprados</th><th>Vendidos</th><th>Quedan</th></tr>
+          </thead>
+          <tbody>
+            <% @ev.inventario.each do |i| %>
+              <tr>
+                <td><%= h(i[:combustible]) %></td>
+                <td><%= gal(i[:comprados]) %></td>
+                <td><%= gal(i[:vendidos]) %></td>
+                <td><strong><%= gal(i[:restantes]) %></strong></td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  <% end %>
+</section>

@@ -1,0 +1,17 @@
+<%= erb :_pasos, layout: false, locals: { actual: 2 } %>
+<section class="panel">
+  <h1 class="panel__titulo">Registrar galones comprados</h1>
+  <p class="panel__subtitulo">Para <strong><%= h(@gasolinera.nombre) %></strong>: escribe los galones de cada combustible y el precio al que compraste cada galón. El total se calcula solo.</p>
+
+  <form action="/gasolineras/<%= @gasolinera.id %>/compras" method="post">
+    <%= erb :_tabla_combustibles, layout: false, locals: { filas: @filas, etiqueta_g: 'Galones comprados', etiqueta_p: 'Precio de compra por galón', etiqueta_t: 'Total comprado' } %>
+
+    <% (@errores || []).each do |msg| %>
+      <p class="alerta alerta--error"><%= h(msg) %></p>
+    <% end %>
+
+    <div class="acciones">
+      <button type="submit" class="boton boton--primario">Trailers</button>
+    </div>
+  </form>
+</section>

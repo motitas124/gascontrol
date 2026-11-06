@@ -1,0 +1,23 @@
+<%= erb :_pasos, layout: false, locals: { actual: 5 } %>
+<section class="panel">
+  <h1 class="panel__titulo">Riesgos</h1>
+  <p class="panel__subtitulo">Para <strong><%= h(@gasolinera.nombre) %></strong>: anota lo que puede afectar la venta de combustible.</p>
+
+  <form action="/gasolineras/<%= @gasolinera.id %>/riesgos" method="post">
+    <label class="campo">
+      <span class="campo__etiqueta">Problemas recurrentes</span>
+      <textarea class="entrada entrada--area" name="problemas" rows="5" placeholder="Ej: Falta de combustible los fines de semana"><%= h(@gasolinera.problemas) %></textarea>
+      <span class="campo__ayuda">Escribe uno por línea.</span>
+    </label>
+    <label class="campo">
+      <span class="campo__etiqueta">Riesgos que pueden afectar la venta de combustible</span>
+      <textarea class="entrada entrada--area" name="riesgos" rows="5" placeholder="Ej: Competencia nueva a dos cuadras"><%= h(@gasolinera.riesgos) %></textarea>
+      <span class="campo__ayuda">Escribe uno por línea.</span>
+    </label>
+
+    <div class="acciones">
+      <button type="submit" name="accion" value="agregar" class="boton">Agregar gasolinera</button>
+      <button type="submit" name="accion" value="calcular" class="boton boton--primario">Calcular riesgo</button>
+    </div>
+  </form>
+</section>

@@ -1,0 +1,46 @@
+<section class="panel panel--suelto">
+  <h1 class="panel__titulo"><%= h(@gasolinera.nombre) %></h1>
+  <p class="ubicacion"><%= h(@gasolinera.ubicacion) %></p>
+
+  <% if @faltan.any? %>
+    <p class="alerta alerta--info">
+      Faltan datos para un resultado completo:
+      <% @faltan.each_with_index do |(nombre, ruta), i| %>
+        <a href="/gasolineras/<%= @gasolinera.id %>/<%= ruta %>"><%= nombre %></a><%= i < @faltan.size - 1 ? ', ' : '.' %>
+      <% end %>
+    </p>
+  <% end %>
+
+  <div class="semaforo semaforo--<%= @ev.nivel %>" role="status">
+    <span class="semaforo__luz" aria-hidden="true"></span>
+    <span><%= @ev.etiqueta %></span>
+  </div>
+
+  <p><%= h(@ev.intro) %></p>
+
+  <h2 class="panel__encabezado"><%= @ev.titulo_detalle %></h2>
+  <ul class="lista-detalle">
+    <% @ev.detalle.each do |texto| %>
+      <li class="lista-detalle__item"><%= h(texto) %></li>
+    <% end %>
+  </ul>
+
+  <h2 class="panel__encabezado panel__encabezado--separado">Cifras usadas</h2>
+  <dl class="metricas">
+    <dt class="metricas__termino">Ingresos por ventas</dt><dd class="metricas__valor"><%= money(@ev.ingresos) %></dd>
+    <dt class="metricas__termino">Costo del combustible vendido</dt><dd class="metricas__valor"><%= money(@ev.costo_vendido) %></dd>
+    <dt class="metricas__termino">Fletes</dt><dd class="metricas__valor"><%= money(@ev.fletes) %></dd>
+    <dt class="metricas__termino">Utilidad neta</dt><dd class="metricas__valor"><%= money(@ev.utilidad) %></dd>
+    <dt class="metricas__termino">Margen neto</dt><dd class="metricas__valor"><%= pct(@ev.margen) %></dd>
+    <dt class="metricas__termino">Combustible vendido de lo comprado</dt><dd class="metricas__valor"><%= pct(@ev.rotacion) %></dd>
+    <dt class="metricas__termino">Galones que quedan</dt><dd class="metricas__valor"><%= gal(@ev.galones_restantes) %></dd>
+    <dt class="metricas__termino">Problemas y riesgos reportados</dt><dd class="metricas__valor"><%= @ev.n_riesgos %></dd>
+  </dl>
+
+  <div class="acciones">
+    <a class="boton" href="/gasolineras/<%= @gasolinera.id %>/riesgos">Volver a riesgos</a>
+    <form class="acciones__formulario" action="/nueva-evaluacion" method="post">
+      <button type="submit" class="boton boton--primario">Nueva evaluación</button>
+    </form>
+  </div>
+</section>

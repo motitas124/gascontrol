@@ -1,0 +1,32 @@
+<div class="acceso">
+  <section class="panel panel--suelto">
+    <h1 class="panel__titulo">Crear cuenta</h1>
+    <p class="panel__subtitulo">Para crear un usuario necesitas el código único.</p>
+
+    <form action="/register" method="post" autocomplete="off">
+      <label class="campo">
+        <span class="campo__etiqueta">Código único</span>
+        <input class="entrada" type="text" name="codigo" inputmode="numeric" placeholder="Código de registro" value="<%= h(params[:codigo]) %>">
+      </label>
+      <% if @error_codigo %><p class="alerta alerta--error"><%= h(@error_codigo) %></p><% end %>
+      <label class="campo">
+        <span class="campo__etiqueta">Correo</span>
+        <input class="entrada" type="email" name="email" placeholder="tucorreo@ejemplo.com" value="<%= h(@user.email) %>">
+      </label>
+      <label class="campo">
+        <span class="campo__etiqueta">Contraseña</span>
+        <input class="entrada" type="password" name="password" placeholder="Mínimo 6 caracteres">
+      </label>
+      <label class="campo">
+        <span class="campo__etiqueta">Repite la contraseña</span>
+        <input class="entrada" type="password" name="password_confirmation" placeholder="Escríbela otra vez">
+      </label>
+      <% @user.errors.map(&:message).uniq.each do |msg| %>
+        <p class="alerta alerta--error"><%= h(msg) %></p>
+      <% end %>
+      <button type="submit" class="boton boton--primario">Registrarme</button>
+    </form>
+  </section>
+
+  <p class="acceso__pie">¿Ya tienes cuenta? <a href="/login">Inicia sesión</a></p>
+</div>

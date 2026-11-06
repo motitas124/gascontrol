@@ -1,0 +1,53 @@
+<div class="tabla-combustibles">
+  <div class="tabla-combustibles__fila tabla-combustibles__fila--cabecera" aria-hidden="true">
+    <span>Combustible</span>
+    <span><%= etiqueta_g %></span>
+    <span><%= etiqueta_p %></span>
+    <span><%= etiqueta_t %></span>
+  </div>
+
+  <% filas.each_with_index do |f, i| %>
+    <div class="tabla-combustibles__fila" data-fila>
+      <div class="tabla-combustibles__nombre"><%= h(f[:combustible]) %></div>
+      <label>
+        <span class="tabla-combustibles__etiqueta-movil"><%= etiqueta_g %></span>
+        <input class="entrada" type="number" step="any" min="0" inputmode="decimal" name="galones[<%= i %>]" placeholder="0" value="<%= h(f[:galones]) %>" aria-label="<%= h(etiqueta_g) %> de <%= h(f[:combustible]) %>" data-g>
+      </label>
+      <label>
+        <span class="tabla-combustibles__etiqueta-movil"><%= etiqueta_p %></span>
+        <input class="entrada" type="number" step="any" min="0" inputmode="decimal" name="precio[<%= i %>]" placeholder="0.00" value="<%= h(f[:precio]) %>" aria-label="<%= h(etiqueta_p) %> de <%= h(f[:combustible]) %>" data-p>
+      </label>
+      <div class="visor tabla-combustibles__total" data-t aria-live="polite">$0.00</div>
+    </div>
+  <% end %>
+
+  <div class="tabla-combustibles__fila">
+    <div class="tabla-combustibles__nombre">Total</div>
+    <div></div>
+    <div></div>
+    <div class="visor tabla-combustibles__total" id="total-general" aria-live="polite">$0.00</div>
+  </div>
+</div>
+
+<script>
+(function () {
+  function fmt(n) {
+    return '$' + n.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+  }
+  var filas = document.querySelectorAll('[data-fila]');
+  var total = document.getElementById('total-general');
+  function calcular() {
+    var suma = 0;
+    filas.forEach(function (f) {
+      var g = parseFloat(f.querySelector('[data-g]').value) || 0;
+      var p = parseFloat(f.querySelector('[data-p]').value) || 0;
+      var t = g * p;
+      suma += t;
+      f.querySelector('[data-t]').textContent = fmt(t);
+    });
+    total.textContent = fmt(suma);
+  }
+  filas.forEach(function (f) { f.addEventListener('input', calcular); });
+  calcular();
+})();
+</script>

@@ -1,0 +1,12 @@
+<% pasos = [[1, 'Gasolinera', 'editar'], [2, 'Galones comprados', 'compras'], [3, 'Trailers', 'trailers'], [4, 'Galones vendidos', 'ventas'], [5, 'Riesgos', 'riesgos']] %>
+<ol class="pasos" aria-label="Pasos del registro">
+  <% pasos.each do |num, nombre, ruta| %>
+    <li class="pasos__item">
+      <% if num != actual && @gasolinera && @gasolinera.persisted? %>
+        <a class="pasos__tab pasos__tab--enlace" href="/gasolineras/<%= @gasolinera.id %>/<%= ruta %>"><span class="pasos__numero"><%= num %></span><%= nombre %></a>
+      <% else %>
+        <span class="pasos__tab<%= ' pasos__tab--actual' if num == actual %>"<%= ' aria-current="step"' if num == actual %>><span class="pasos__numero<%= ' pasos__numero--actual' if num == actual %>"><%= num %></span><%= nombre %></span>
+      <% end %>
+    </li>
+  <% end %>
+</ol>
