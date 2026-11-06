@@ -1,6 +1,7 @@
 require 'sinatra/base'
 require 'sinatra/activerecord'
 require 'bigdecimal'
+require 'digest'
 
 require_relative 'lib/css_builder'
 require_relative 'helpers/format_helpers'
@@ -28,10 +29,12 @@ class App < Sinatra::Base
   # En desarrollo, recompila el .scss al recargar la página
   configure(:development) { use SassRecarga }
 
+  # Rack exige un secreto de sesión de 64 caracteres o más. Render genera uno
+  # de 44, así que se pasa por SHA-512 (128 caracteres hexadecimales) y
+  # funciona con cualquier longitud de SESSION_SECRET.
   enable :sessions
-  set :session_secret, ENV.fetch('SESSION_SECRET') {
-    'clave-solo-para-desarrollo-cambiala-en-produccion-' + 'x' * 40
-  }
+  clave_sesion = ENV.fetch('SESSION_SECRET') { 'clave-solo-para-desarrollo-cambiala-en-produccion' }
+  set :session_secret, Digest::SHA512.hexdigest(clave_sesion)
 
   use AuthController
   use GasolinerasController
