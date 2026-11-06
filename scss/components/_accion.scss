@@ -1,0 +1,24 @@
+@use '../abstracts' as *;
+
+// Bloque: decisión sugerida en la comparativa (Vender / Conservar)
+.accion {
+  margin: 12px 0;
+  padding: 8px;
+  border-radius: 10px;
+  text-align: center;
+  font-family: $fuente-titulo;
+  font-size: 1.9rem;
+  font-weight: 700;
+
+  &--vender {
+    background: $error-fondo;
+    border: 2px solid $rojo;
+    color: $error-texto;
+  }
+
+  &--conservar {
+    background: $ok-fondo;
+    border: 2px solid $verde;
+    color: $ok-texto;
+  }
+}

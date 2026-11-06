@@ -1,0 +1,56 @@
+@use '../abstracts' as *;
+
+// Bloque: semáforo de rentabilidad (rojo, amarillo, verde)
+.semaforo {
+  @include flex($espacio: 14px);
+  width: 100%;
+  max-width: 520px;
+  margin: 14px 0 22px;
+  padding: 16px 24px;
+  border: 3px solid $sombra-semaforo;
+  border-radius: 14px;
+  box-shadow: 0 4px 0 $sombra-semaforo;
+  color: #fff;
+  font-family: $fuente-titulo;
+  font-size: 2.1rem;
+  font-weight: 700;
+  line-height: 1.1;
+
+  @include hasta(tableta) {
+    font-size: 1.7rem;
+  }
+
+  // Un modificador por cada nivel, generado con @each desde el mapa de colores
+  @each $nivel, $color in $colores-nivel {
+    &--#{$nivel} {
+      background: $color;
+    }
+  }
+
+  // El amarillo necesita texto oscuro para leerse bien
+  &--amarillo {
+    color: $texto-amarillo;
+  }
+
+  // Versión pequeña para las tarjetas de la comparativa
+  &--compacto {
+    margin: 10px 0 14px;
+    padding: 9px 16px;
+    box-shadow: 0 3px 0 $sombra-semaforo;
+    font-size: 1.4rem;
+
+    .semaforo__luz {
+      width: 18px;
+      height: 18px;
+    }
+  }
+
+  &__luz {
+    flex: none;
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    background: $luz-semaforo;
+    box-shadow: 0 0 0 4px $aro-luz;
+  }
+}

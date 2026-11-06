@@ -1,0 +1,60 @@
+@use '../abstracts' as *;
+
+// Bloque: pestañas de los pasos del registro
+.pasos {
+  @include flex($alineacion: stretch, $espacio: 6px);
+  overflow-x: auto;
+  margin: 24px 0 0;
+  padding: 0;
+  list-style: none;
+
+  &__item {
+    flex: 1 0 auto;
+  }
+
+  // Elemento: la pestaña (puede ser <a> o <span>)
+  &__tab {
+    @include flex($justificacion: center, $espacio: 8px);
+    padding: 11px 16px;
+    border: 1px solid $linea;
+    border-bottom: 0;
+    border-radius: 12px 12px 0 0;
+    background: $tab-inactivo;
+    color: $suave;
+    text-decoration: none;
+    font-weight: 700;
+    white-space: nowrap;
+
+    // Modificador: pestaña a la que se puede volver
+    &--enlace {
+      background: $papel;
+      color: $marino;
+
+      &:hover {
+        background: $hover-claro;
+      }
+    }
+
+    // Modificador: pestaña donde está el usuario
+    &--actual {
+      background: $marino;
+      color: #fff;
+      border-color: $marino;
+    }
+  }
+
+  &__numero {
+    display: grid;
+    place-items: center;
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    background: $acero;
+    color: #fff;
+    font-size: .9rem;
+
+    &--actual {
+      background: $cielo;
+    }
+  }
+}

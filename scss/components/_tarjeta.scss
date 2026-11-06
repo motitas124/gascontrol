@@ -1,0 +1,23 @@
+@use '../abstracts' as *;
+
+// Bloque: tarjeta de una gasolinera en la comparativa
+.tarjeta {
+  @include superficie(14px);
+  position: relative;
+  padding: 20px;
+
+  &__insignia {
+    display: inline-block;
+    margin-bottom: 8px;
+    padding: 3px 12px;
+    border-radius: 999px;
+    background: $marino;
+    color: #fff;
+    font-size: .85rem;
+    font-weight: 700;
+  }
+
+  &__titulo {
+    @include titulo(1.6rem, 1.15);
+  }
+}

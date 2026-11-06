@@ -1,0 +1,27 @@
+@use '../abstracts' as *;
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: $fondo;
+  color: $tinta;
+  font-family: $fuente-texto;
+  font-size: 17px;
+  line-height: 1.5;
+}
+
+a {
+  color: $acero;
+  font-weight: 700;
+}
+
+// Foco visible en enlaces y controles (mixin "foco")
+a,
+button,
+input,
+textarea {
+  @include foco;
+}

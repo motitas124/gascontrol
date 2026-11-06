@@ -1,0 +1,15 @@
+@use '../abstracts' as *;
+
+// Bloque: pantalla estilo surtidor que muestra totales
+.visor {
+  @include flex($justificacion: flex-end);
+  min-height: 46px;
+  padding: 9px 14px;
+  border: 2px solid $lcd-borde;
+  border-radius: 9px;
+  background: $lcd-fondo;
+  color: $lcd-texto;
+  font-family: $fuente-lcd;
+  font-size: 1.35rem;
+  overflow-wrap: anywhere;
+}

@@ -1,0 +1,12 @@
+@use '../abstracts' as *;
+
+// Bloque: contenedor central de cada pantalla
+.pagina {
+  max-width: 980px;
+  margin: 0 auto;
+  padding: 0 18px 56px;
+
+  @include hasta(movil) {
+    padding: 0 12px 40px;
+  }
+}

@@ -1,0 +1,27 @@
+@use '../abstracts' as *;
+
+// Bloque: mensajes para el usuario
+.alerta {
+  margin: 0 0 12px;
+  padding: 9px 13px;
+  border: 1.5px solid;
+  border-radius: 9px;
+  font-weight: 700;
+
+  // Modificador: error de validación
+  &--error {
+    background: $error-fondo;
+    border-color: $rojo;
+    color: $error-texto;
+  }
+
+  // Modificador: aviso informativo
+  &--info {
+    margin-bottom: 18px;
+    padding: 12px 16px;
+    border-color: $cielo;
+    border-radius: 10px;
+    background: $info-fondo;
+    font-weight: 600;
+  }
+}

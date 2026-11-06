@@ -1,0 +1,36 @@
+@use '../abstracts' as *;
+
+// Bloque: botón (también se usa en enlaces <a>)
+.boton {
+  @include flex($justificacion: center, $espacio: 8px, $display: inline-flex);
+  padding: 11px 24px;
+  border: 2px solid $marino;
+  border-radius: 10px;
+  background: #fff;
+  color: $marino;
+  font: inherit;
+  font-size: 1.02rem;
+  font-weight: 700;
+  text-decoration: none;
+  cursor: pointer;
+
+  &:hover {
+    background: $hover-boton;
+  }
+
+  // Modificadores
+  &--primario {
+    @include boton-variante($marino, #fff, $marino-hover);
+  }
+
+  &--chico {
+    padding: 7px 14px;
+    font-size: .92rem;
+  }
+
+  &--fantasma {
+    padding: 6px 14px;
+    border-color: $borde-fantasma;
+    @include boton-variante(transparent, #fff, $hover-fantasma);
+  }
+}

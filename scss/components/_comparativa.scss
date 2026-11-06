@@ -1,0 +1,10 @@
+@use '../abstracts' as *;
+
+// Bloque: pantalla de comparación de gasolineras
+.comparativa {
+  // Elemento: rejilla de tarjetas (Grid responsivo, sin media query)
+  &__tarjetas {
+    @include cuadricula(repeat(auto-fit, minmax(300px, 1fr)), 18px);
+    margin-top: 18px;
+  }
+}

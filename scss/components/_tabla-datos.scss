@@ -1,0 +1,29 @@
+@use '../abstracts' as *;
+
+// Bloque: tabla de inventario
+.tabla-datos {
+  width: 100%;
+  margin-top: 14px;
+  border-collapse: collapse;
+
+  th,
+  td {
+    padding: 9px 10px;
+    border-bottom: 1px solid $linea;
+    text-align: right;
+
+    &:first-child {
+      text-align: left;
+    }
+  }
+
+  th {
+    color: $suave;
+    font-size: .92rem;
+  }
+
+  // Permite desplazar la tabla en pantallas angostas
+  &__contenedor {
+    overflow-x: auto;
+  }
+}

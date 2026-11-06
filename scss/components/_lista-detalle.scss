@@ -1,0 +1,11 @@
+@use '../abstracts' as *;
+
+// Bloque: lista de razones o recomendaciones
+.lista-detalle {
+  margin: 8px 0 0;
+  padding-left: 22px;
+
+  &__item {
+    margin-bottom: 9px;
+  }
+}

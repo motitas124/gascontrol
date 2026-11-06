@@ -1,0 +1,53 @@
+@use '../abstracts' as *;
+
+// Bloque: tabla de combustibles (Super, Diesel, Ecopaís)
+// Cada fila es una cuadrícula (CSS Grid) de 4 columnas.
+.tabla-combustibles {
+  &__fila {
+    @include cuadricula(140px 1fr 1fr 1.1fr, 12px);
+    align-items: center;
+    margin-bottom: 12px;
+
+    // En pantallas pequeñas la fila pasa a 2 columnas
+    @include hasta(tableta) {
+      grid-template-columns: 1fr 1fr;
+    }
+
+    &--cabecera {
+      color: $suave;
+      font-size: .92rem;
+      font-weight: 700;
+
+      @include hasta(tableta) {
+        display: none;
+      }
+    }
+  }
+
+  &__nombre {
+    color: $marino;
+    font-family: $fuente-titulo;
+    font-size: 1.6rem;
+    font-weight: 700;
+  }
+
+  // Etiqueta que solo se ve en el celular (reemplaza a la cabecera)
+  &__etiqueta-movil {
+    display: none;
+    margin-bottom: 3px;
+    font-size: .9rem;
+    font-weight: 700;
+
+    @include hasta(tableta) {
+      display: block;
+    }
+  }
+
+  // El nombre y el total ocupan toda la fila en el celular
+  &__nombre,
+  &__total {
+    @include hasta(tableta) {
+      grid-column: 1 / -1;
+    }
+  }
+}

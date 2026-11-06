@@ -1,0 +1,68 @@
+// =====================================================================
+// VARIABLES: todos los valores de diseño viven aquí.
+// Para cambiar un color o una fuente se edita solo este archivo.
+// =====================================================================
+
+// Colores de marca
+$marino: #12263F;
+$acero:  #3D5A80;
+$cielo:  #00A6D6;
+
+// Colores de la interfaz
+$fondo:  #EEF2F6;
+$papel:  #FFFFFF;
+$tinta:  #14202E;
+$suave:  #566373;
+$linea:  #CBD5E1;
+
+// Semáforo
+$rojo:     #C62828;
+$amarillo: #F5B700;
+$verde:    #1E8E3E;
+$texto-amarillo: #1B1B1B;
+
+// Variaciones de uso puntual
+$tab-inactivo:   #DDE5EE;
+$hover-claro:    #F3F7FB;
+$hover-boton:    #E8EEF5;
+$marino-hover:   #1C3A5E;
+$superficie:     #F6F9FC;
+$borde-campo:    #94A3B8;
+$error-fondo:    #FDECEC;
+$error-texto:    #8E1B1B;
+$info-fondo:     #E8F3FA;
+$ok-fondo:       #E6F4EA;
+$ok-texto:       #14612B;
+
+// Pantalla estilo surtidor (LCD)
+$lcd-fondo: #0B1A2B;
+$lcd-texto: #BFF3FF;
+$lcd-borde: #223A57;
+
+// Transparencias
+$sombra-suave:      rgba(18, 38, 63, .08);
+$sombra-semaforo:   rgba(0, 0, 0, .22);
+$borde-cabecera:    rgba(255, 255, 255, .28);
+$borde-fantasma:    rgba(255, 255, 255, .6);
+$hover-fantasma:    rgba(255, 255, 255, .12);
+$luz-semaforo:      rgba(255, 255, 255, .92);
+$aro-luz:           rgba(0, 0, 0, .18);
+
+// Tipografía
+$fuente-titulo: 'Barlow Condensed', 'Arial Narrow', Arial, sans-serif;
+$fuente-texto:  'Barlow', 'Segoe UI', Arial, sans-serif;
+$fuente-lcd:    'Share Tech Mono', Consolas, 'Courier New', monospace;
+
+// Mapa de puntos de quiebre (lo usa el mixin "hasta")
+$puntos-de-quiebre: (
+  movil: 480px,
+  tableta: 700px,
+  escritorio: 980px
+);
+
+// Mapa de colores del semáforo (lo recorre un @each)
+$colores-nivel: (
+  rojo: $rojo,
+  amarillo: $amarillo,
+  verde: $verde
+);

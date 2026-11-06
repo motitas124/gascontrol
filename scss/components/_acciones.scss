@@ -1,0 +1,15 @@
+@use '../abstracts' as *;
+
+// Bloque: fila de botones al pie de cada formulario
+.acciones {
+  @include flex($justificacion: flex-end, $alineacion: stretch, $espacio: 12px);
+  flex-wrap: wrap;
+  margin-top: 26px;
+  padding-top: 20px;
+  border-top: 1px solid $linea;
+
+  // Un <form> dentro de la fila no debe agregar margen
+  &__formulario {
+    margin: 0;
+  }
+}

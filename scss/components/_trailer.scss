@@ -1,0 +1,12 @@
+@use '../abstracts' as *;
+
+// Bloque: una fila de trailer (descripción + valor + botón quitar)
+.trailer {
+  @include cuadricula(1fr 220px auto, 10px);
+  align-items: center;
+  margin-bottom: 10px;
+
+  @include hasta(tableta) {
+    grid-template-columns: 1fr;
+  }
+}

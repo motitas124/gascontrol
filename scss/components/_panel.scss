@@ -1,0 +1,38 @@
+@use '../abstracts' as *;
+
+// Bloque: panel blanco donde va cada formulario o resultado
+.panel {
+  @include superficie(0 14px 14px 14px);
+  padding: 26px;
+
+  @include hasta(movil) {
+    padding: 18px;
+  }
+
+  // Modificador: panel sin pestañas encima (login, resultado...)
+  &--suelto {
+    margin-top: 28px;
+    border-radius: 14px;
+  }
+
+  &__titulo {
+    @include titulo(2.3rem, 1.1);
+
+    @include hasta(tableta) {
+      font-size: 2rem;
+    }
+  }
+
+  &__subtitulo {
+    margin: 0 0 22px;
+    color: $suave;
+  }
+
+  &__encabezado {
+    @include titulo(1.6rem, 1.15);
+
+    &--separado {
+      margin-top: 26px;
+    }
+  }
+}

@@ -1,0 +1,38 @@
+// =====================================================================
+// GasControl: hoja de estilos principal (Sass / SCSS)
+//
+// Este archivo solo reúne los parciales (cada uno es un componente).
+// Se compila a public/css/app.css con:   bundle exec rake css:build
+//
+// Nomenclatura: BEM  (bloque__elemento--modificador)
+// =====================================================================
+
+// Base
+@use 'base/base';
+
+// Layout (estructura de la página)
+@use 'layout/cabecera';
+@use 'layout/pagina';
+@use 'layout/acceso';
+
+// Componentes
+@use 'components/pasos';
+@use 'components/panel';
+@use 'components/boton';
+@use 'components/campo';
+@use 'components/alerta';
+@use 'components/acciones';
+@use 'components/visor';
+@use 'components/tabla-combustibles';
+@use 'components/trailer';
+@use 'components/cifras';
+@use 'components/tabla-datos';
+@use 'components/resumen';
+@use 'components/semaforo';
+@use 'components/lista-detalle';
+@use 'components/metricas';
+@use 'components/ubicacion';
+@use 'components/tarjeta';
+@use 'components/accion';
+@use 'components/comparativa';
+@use 'components/desplegable';

@@ -1,0 +1,10 @@
+@use '../abstracts' as *;
+
+// Bloque: sección que se abre y se cierra (<details>)
+.desplegable {
+  &__titulo {
+    color: $marino;
+    font-weight: 700;
+    cursor: pointer;
+  }
+}

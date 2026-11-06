@@ -1,0 +1,72 @@
+// =====================================================================
+// MIXINS: bloques de estilo reutilizables con parámetros.
+// =====================================================================
+@use 'sass:map';
+@use 'variables' as *;
+
+// Media query de "hasta X píxeles", usando el mapa de puntos de quiebre.
+//   @include hasta(tableta) { ...estilos... }
+@mixin hasta($nombre) {
+  $ancho: map.get($puntos-de-quiebre, $nombre);
+  @media (max-width: $ancho) {
+    @content;
+  }
+}
+
+// Flexbox. Los parámetros que quedan en null no se escriben en el CSS.
+@mixin flex($justificacion: null, $alineacion: center, $espacio: null, $display: flex) {
+  display: $display;
+  align-items: $alineacion;
+  justify-content: $justificacion;
+  gap: $espacio;
+}
+
+// CSS Grid con las columnas y el espacio que se pidan.
+@mixin cuadricula($columnas, $espacio: null) {
+  display: grid;
+  grid-template-columns: $columnas;
+  gap: $espacio;
+}
+
+// Tarjeta blanca con borde y sombra suave.
+@mixin superficie($radio: 14px) {
+  background: $papel;
+  border: 1px solid $linea;
+  border-radius: $radio;
+  box-shadow: 0 1px 3px $sombra-suave;
+}
+
+// Estilo de los títulos (fuente condensada).
+@mixin titulo($tamano, $interlineado: 1.1) {
+  margin: 0 0 6px;
+  color: $marino;
+  font-family: $fuente-titulo;
+  font-size: $tamano;
+  font-weight: 700;
+  line-height: $interlineado;
+}
+
+// Colores de un botón y de su estado :hover.
+@mixin boton-variante($fondo, $texto, $hover) {
+  background: $fondo;
+  color: $texto;
+
+  &:hover {
+    background: $hover;
+  }
+}
+
+// Una sola línea con "..." cuando el texto no cabe.
+@mixin truncar {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+// Anillo de foco visible para quien navega con teclado.
+@mixin foco {
+  &:focus-visible {
+    outline: 3px solid $cielo;
+    outline-offset: 2px;
+  }
+}
