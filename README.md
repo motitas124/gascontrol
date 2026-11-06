@@ -2,7 +2,7 @@
 
 Aplicación web que evalúa si una gasolinera es rentable. Se registran las compras de combustible, el costo de los fletes y las ventas, y el sistema responde con un **semáforo** (rojo, amarillo o verde) que explica el porqué. Si se evalúan dos o más gasolineras, las compara y sugiere **Vender** (rojo) o **Conservar** (verde).
 
-**Demo en línea:** _(pega aquí la URL de Render cuando termines de desplegar, ver la sección "Despliegue")_
+**Demo en línea:** https://gascontrol-yru8.onrender.com (plan gratuito de Render: si estuvo inactiva, la primera visita tarda cerca de un minuto en responder). El usuario y las gasolineras de ejemplo están en la sección "Datos de demostración".
 
 ![Pantalla de resultado con el semáforo verde](docs/img/resultado.png)
 
