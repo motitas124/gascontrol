@@ -5,9 +5,10 @@ services:
     name: gascontrol
     runtime: ruby
     plan: free
-    # Instala las gemas y compila el Sass. Si Sass fallara, se usa el
+    # Instala las gemas (sin modo congelado: el repositorio no incluye Gemfile.lock)
+    # y compila el Sass. Si Sass fallara, se usa el
     # public/css/app.css que ya viene compilado en el repositorio.
-    buildCommand: 'bundle install && (bundle exec rake css:build || echo "Sass no compilo, se usa public/css/app.css")'
+    buildCommand: 'bundle config set --local frozen false && bundle config set --local deployment false && bundle install && (bundle exec rake css:build || echo "Sass no compilo, se usa public/css/app.css")'
     # Crea las tablas, carga los datos de demostración y arranca el servidor.
     startCommand: bundle exec rake db:migrate demo:cargar && bundle exec puma config.ru -b tcp://0.0.0.0:$PORT -e production
     healthCheckPath: /login
