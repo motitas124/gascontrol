@@ -1,0 +1,22 @@
+# Configuración de despliegue para Render (https://render.com).
+# En Render: New + > Blueprint > elegir este repositorio > Apply.
+services:
+  - type: web
+    name: gascontrol
+    runtime: ruby
+    plan: free
+    # Instala las gemas y compila el Sass. Si Sass fallara, se usa el
+    # public/css/app.css que ya viene compilado en el repositorio.
+    buildCommand: 'bundle install && (bundle exec rake css:build || echo "Sass no compilo, se usa public/css/app.css")'
+    # Crea las tablas, carga los datos de demostración y arranca el servidor.
+    startCommand: bundle exec rake db:migrate demo:cargar && bundle exec puma config.ru -b tcp://0.0.0.0:$PORT -e production
+    healthCheckPath: /login
+    envVars:
+      - key: RACK_ENV
+        value: production
+      - key: APP_ENV
+        value: production
+      - key: RUBY_VERSION
+        value: 3.3.6
+      - key: SESSION_SECRET
+        generateValue: true
